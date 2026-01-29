@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="stars-container"></div>
+    <div id="noise-overlay"></div>
+
+    <main id="app">
+        <!-- Room 1: The Entry -->
+        <section id="room-1" class="room active" data-room="1">
+            <div class="content-wrapper centered">
+                <div class="lock-icon">
+                    <i class="fa-solid fa-heart-lock"></i>
+                </div>
+                <h1 class="title">Restricted Area</h1>
+                <p class="subtitle">Only for my favorite person.</p>
+
+                <div class="input-group">
+                    <label for="password">Enter the day the stars aligned.</label>
+                    <input type="text" id="password" placeholder="DDMMYYYY" maxlength="8" autocomplete="off">
+                    <p class="hint">Hint: 05... yaad hai na?</p>
+                </div>
+
+                <div class="message-area" id="login-message"></div>
+
+                <button class="btn primary-btn" id="enter-btn">Unlock <i class="fa-solid fa-key"></i></button>
+            </div>
+        </section>
+
+        <!-- Room 2: Hall of Memories -->
+        <section id="room-2" class="room" data-room="2">
+            <div class="content-wrapper">
+                <h2 class="section-header">Some moments stay in the heart forever,<br>like cached data.</h2>
+
+                <div class="gallery">
+                    <!-- Photo 1 -->
+                    <div class="polaroid" style="--rotation: -3deg">
+                        <div class="photo-frame">
+                            <img src="images/photo1.jpg" alt="Our Memory 1" class="real-photo">
+                        </div>
+                        <p class="caption">Ajnabee se 'Zindagi' banne ka safar yahan se shuru hua.</p>
+                    </div>
+
+                    <!-- Photo 2 -->
+                    <div class="polaroid" style="--rotation: 2deg">
+                        <div class="photo-frame">
+                            <img src="images/photo2.jpg" alt="Our Memory 2" class="real-photo">
+                        </div>
+                        <p class="caption">Hum dono pagal hain, aur mujhe ye pagalpan bohot pasand hai.</p>
+                    </div>
+
+                    <!-- Photo 3 -->
+                    <div class="polaroid" style="--rotation: -1deg">
+                        <div class="photo-frame">
+                            <img src="images/photo3.jpg" alt="Our Memory 3" class="real-photo">
+                        </div>
+                        <p class="caption">Is pal mein mujhe laga tha—bas, yahi hai wo. She is the one.</p>
+                    </div>
+
+                    <!-- Photo 4 -->
+                    <div class="polaroid" style="--rotation: 4deg">
+                        <div class="photo-frame">
+                            <img src="images/photo4.jpg" alt="Our Memory 4" class="real-photo">
+                        </div>
+                        <p class="caption">300 din ho chuke hain, par aaj bhi tumhe dekh kar wahi pehli wali feeling
+                            aati hai.</p>
+                    </div>
+                </div>
+
+                <button class="btn secondary-btn next-room-btn" onclick="nextRoom()">Continue Journey <i
+                        class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <!-- Room 3: The Quiz -->
+        <section id="room-3" class="room" data-room="3">
+            <div class="content-wrapper centered">
+                <h2 class="section-header">How well do you know me?</h2>
+
+                <div class="quiz-container">
+                    <!-- Q1 -->
+                    <div class="quiz-card active" id="q1">
+                        <h3>Meri favorite jagah kaunsi hai?</h3>
+                        <div class="options">
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, false, 'Galat! Mountains pasand hain, par sabse favorite nahi.')">A)
+                                Free Fire</button>
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, false, 'Beach pe mitti lagti hai yaar.')">B) Ghar</button>
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, true, 'Bilkul sahi! Wahan sabse zyada sukoon milta hai.')">C)
+                                Tumhare saath video calls pe</button>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="quiz-card" id="q2">
+                        <h3>Jab main gussa hota hoon to mujhe kya chahiye?</h3>
+                        <div class="options">
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, false, 'Akelapan nahi, tum chahiye ho pagli.')">A)
+                                Akelapan</button>
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, false, 'Khana to hamesha chahiye, par gusse mein nahi.')">B)
+                                Khana</button>
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, true, 'Tumhari ek \'Hello\' se sab thik ho jata hai.')">C)
+                                Tumhari awaaz aur thoda sa pyaar</button>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="quiz-card" id="q3">
+                        <h3>Hamara 'National Anthem' (Favorite Song) kaunsa hai?</h3>
+                        <div class="options">
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, false, 'Ye accha hai, par wo wala nahi.')">A) Tu ishq hai to
+                                main bahon me hu</button>
+                            <button class="option-btn"
+                                onclick="checkAnswer(this, true, 'Ye gaana bajte hi sirf tumhari yaad aati hai.')">B)
+                                Pehle Bhi Main</button>
+                            <button class="option-btn" onclick="checkAnswer(this, false, 'Nah, try again.')">C) Tum Hi
+                                Ho</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="quiz-feedback" class="quiz-feedback"></div>
+            </div>
+        </section>
+
+        <!-- Placeholders for other rooms -->
+        <!-- Room 4: Our Favorites -->
+        <section id="room-4" class="room" data-room="4">
+            <div class="content-wrapper centered">
+                <h2 class="section-header">Our Comfort Zone</h2>
+                <div class="favorites-grid">
+                    <div class="fav-card" onclick="toggleFav(this)">
+                        <div class="icon"><i class="fa-solid fa-film"></i></div>
+                        <h3>Movies/Series</h3>
+                        <div class="fav-content">
+                            <p>Wo movies jo humne saath dekhi, aur wo scenes jahan humne saath roya. Ye list sirf movies
+                                ki nahi, hamare emotions ki hai.</p>
+                        </div>
+                    </div>
+                    <div class="fav-card" onclick="toggleFav(this)">
+                        <div class="icon"><i class="fa-solid fa-utensils"></i></div>
+                        <h3>Food</h3>
+                        <div class="fav-content">
+                            <p>Tmhare saath movie date pe jo bhi miljaye.</p>
+                        </div>
+                    </div>
+                    <div class="fav-card" onclick="toggleFav(this)">
+                        <div class="icon"><i class="fa-solid fa-moon"></i></div>
+                        <h3>Late Night Talks</h3>
+                        <div class="fav-content">
+                            <p>Wo baatein jo humne har raat ki... wo mere liye duniya ki sabse keemti cheez hain.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn secondary-btn next-room-btn" onclick="nextRoom()">Continue <i
+                        class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+        <!-- Room 5: Mental Peace Wall -->
+        <section id="room-5" class="room" data-room="5">
+            <div class="content-wrapper centered">
+                <h2 class="section-header">The Code Behind My Success</h2>
+                <div class="peace-grid">
+                    <div class="peace-card">
+                        <h3>Support</h3>
+                        <p>Jab puri duniya mere khilaaf lagti hai, tum mere side khadi hoti ho. Aur bas wo hi kaafi hota
+                            hai mere ladne ke liye.</p>
+                    </div>
+                    <div class="peace-card">
+                        <h3>Growth</h3>
+                        <p>Pratyush Rai aaj jo kuch bhi hai—B.Tech, Projects, Business ideas—sabka base tumhara support
+                            hai. Tumne mujhe banaya hai.</p>
+                    </div>
+                    <div class="peace-card">
+                        <h3>Peace</h3>
+                        <p>Mera dimaag hamesha chalta rehta hai (hacker mind, you know), par tumhare paas aate hi sab
+                            shant ho jata hai. You are my Anti-Anxiety.</p>
+                    </div>
+                </div>
+                <button class="btn secondary-btn next-room-btn" onclick="nextRoom()">Proceed to Heart <i
+                        class="fa-solid fa-heart"></i></button>
+            </div>
+        </section>
+        <!-- Room 6: The Love Letter -->
+        <section id="room-6" class="room" data-room="6">
+            <div class="content-wrapper">
+                <div class="letter-container">
+                    <div id="typewriter-text"></div>
+                </div>
+                <button class="btn primary-btn" id="finish-letter-btn" onclick="nextRoom()"
+                    style="opacity:0; transition: opacity 1s">See Our Future <i
+                        class="fa-solid fa-binoculars"></i></button>
+            </div>
+        </section>
+        <!-- Room 7: Future Blueprint -->
+        <section id="room-7" class="room" data-room="7">
+            <div class="content-wrapper centered">
+                <h2 class="section-header">My Vision Board<br>(It's incomplete without you)</h2>
+                <div class="stars-grid">
+                    <div class="star-box"
+                        onclick="revealFuture(this, 'Main chahe kitni bhi badi company khadi kar loon, par us success ko celebrate karne ke liye mujhe tum chahiye.')">
+                        <div class="star-icon"><i class="fa-solid fa-star"></i></div>
+                        <h3>Career Empire</h3>
+                        <p class="future-text"></p>
+                    </div>
+                    <div class="star-box"
+                        onclick="revealFuture(this, 'Ek din hum wahan jayenge jahan sirf hum honge. No laptop, no code. Sirf tum, main aur sukoon.')">
+                        <div class="star-icon"><i class="fa-solid fa-plane"></i></div>
+                        <h3>Travel</h3>
+                        <p class="future-text"></p>
+                    </div>
+                    <div class="star-box"
+                        onclick="revealFuture(this, 'Mujhe sirf tumhari jawani nahi chahiye, mujhe tumhare chehre ki jhurriyan (wrinkles) bhi dekhni hain. I want the Forever.')">
+                        <div class="star-icon"><i class="fa-solid fa-infinity"></i></div>
+                        <h3>Growing Old</h3>
+                        <p class="future-text"></p>
+                    </div>
+                </div>
+                <button class="btn secondary-btn next-room-btn" onclick="nextRoom()">Continue <i
+                        class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+        <!-- Room 8: Patch Notes -->
+        <section id="room-8" class="room" data-room="8">
+            <div class="content-wrapper centered">
+                <h2 class="section-header glitch-header" data-text="Version Control: Working on Myself">Version Control:
+                    Working on Myself</h2>
+                <p class="subtitle">Main perfect software nahi hoon, mujhme bugs hain. Par main promise karta hoon, main
+                    har din update ho raha hoon—sirf tumhare liye.</p>
+
+                <div class="patch-list">
+                    <div class="patch-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Fixed: Gussa kam karna (Working on it...)</label>
+                    </div>
+                    <div class="patch-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Optimized: Listening skills (Ab main zyada sununga)</label>
+                    </div>
+                    <div class="patch-item">
+                        <input type="checkbox" checked disabled>
+                        <label>Permanent Feature: Loving you unconditionally (Bug-free guarantee)</label>
+                    </div>
+                </div>
+
+                <button class="btn primary-btn" onclick="forgiveBugs(this)">Forgive Bugs? <i
+                        class="fa-solid fa-bug"></i></button>
+            </div>
+        </section>
+        <!-- Room 9: Library of Little Things -->
+        <section id="room-9" class="room" data-room="9">
+            <div class="content-wrapper centered">
+                <h2 class="section-header">Things You Didn't Know I Notice</h2>
+                <div class="notes-grid">
+                    <div class="sticky-note color-1">
+                        <p>Jis tarah tum hasti ho aur apni naak sikodti ho (scrunch nose)—wo mera favourite view hai.
+                        </p>
+                    </div>
+                    <div class="sticky-note color-2">
+                        <p>Tumhare ankhein.</p>
+                    </div>
+                    <div class="sticky-note color-3">
+                        <p>Jab tum excited hokar tezi se bolti ho, mujhe kuch samajh nahi aata par sunna accha lagta
+                            hai.</p>
+                    </div>
+                    <div class="sticky-note color-4">
+                        <p>Tumhari caring nature. Jaise tum meri health ki chinta karti ho, waisi chinta aaj tak sirf
+                            mummy ne ki hai.</p>
+                    </div>
+                </div>
+                <button class="btn secondary-btn next-room-btn" onclick="nextRoom()">Cross the Bridge <i
+                        class="fa-solid fa-archway"></i></button>
+            </div>
+        </section>
+        <!-- Room 10: The Promise Bridge -->
+        <section id="room-10" class="room" data-room="10">
+            <div class="content-wrapper centered">
+                <h2 class="section-header">The Vows</h2>
+                <div class="promise-container">
+                    <p class="promise-text">"Main promise karta hoon ki jab tak hum saath hain, tum kabhi akela feel
+                        nahi karogi."</p>
+                    <p class="promise-text">"Main promise karta hoon ki meri priority list mein 'Hum' hamesha 'Main' se
+                        upar rahenge."</p>
+                    <p class="promise-text">"Main promise karta hoon ki chahe humare beech kitni bhi badi ladai ho, main
+                        humesha wapas aaunga."</p>
+
+                    <div class="fingerprint-scanner" id="fingerprint-btn">
+                        <i class="fa-solid fa-fingerprint"></i>
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__circle" stroke="white" stroke-width="4" fill="transparent"
+                                r="52" cx="60" cy="60" />
+                        </svg>
+                    </div>
+                    <p class="hint">Hold to Seal the Promise</p>
+                </div>
+            </div>
+        </section>
+        <!-- Room 11: Coupon Generator -->
+        <section id="room-11" class="room" data-room="11">
+            <div class="content-wrapper centered">
+                <div class="final-message">
+                    <h2 class="section-header">Redeem Anytime Coupons</h2>
+                    <p>Take a screenshot and send it to me whenever you need.</p>
+                </div>
+
+                <div class="coupons-grid">
+                    <div class="coupon-card">
+                        <div class="coupon-header">COUPON</div>
+                        <h3>One Fight Win</h3>
+                        <p>Argue mat karna, bas haar maan lena.</p>
+                        <div class="coupon-code">CODE: NO_ARGUMENTS</div>
+                    </div>
+                    <div class="coupon-card">
+                        <div class="coupon-header">COUPON</div>
+                        <h3>Unlimited Cuddles</h3>
+                        <p>Valid for lifetime.</p>
+                        <div class="coupon-code">CODE: HUG_ME_NOW</div>
+                    </div>
+                    <div class="coupon-card">
+                        <div class="coupon-header">COUPON</div>
+                        <h3>Late Night Maggie & Drive</h3>
+                        <p>Jab bhi tum bolo.</p>
+                        <div class="coupon-code">CODE: LETS_GO</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <p>You have reached the end of this digital journey,</p>
+                    <p>But our real journey is just getting started.</p>
+                    <h1
+                        style="font-family: var(--font-heading); font-size: 3rem; margin-top: 20px; color: var(--secondary-color);">
+                        I Love You ❤️</h1>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
