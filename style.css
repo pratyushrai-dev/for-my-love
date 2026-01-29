@@ -968,24 +968,3 @@ body {
         width: 120px;
     }
 }
-
-font-family: monospace;
-background: #eee;
-padding: 5px;
-border-radius: 5px;
-font-weight: bold;
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7);
-    }
-
-    70% {
-        box-shadow: 0 0 0 20px rgba(230, 57, 70, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
-    }
-}
